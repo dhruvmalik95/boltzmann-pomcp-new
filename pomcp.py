@@ -258,7 +258,7 @@ class POMCP_Solver:
 				# return next_state, next_human_action
 				#print("x")
 			else:
-				qValues.append(child.value_list[theta_index] + self.c/(1.5*child.visited_list[theta_index] + 1))
+				qValues.append(child.value_list[theta_index] + self.c/(child.visited_list[theta_index] + 1))
 
 		best_index = qValues.index(max(qValues))
 		next_human_action = self.observations[best_index]

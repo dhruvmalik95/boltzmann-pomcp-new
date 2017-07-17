@@ -9,10 +9,8 @@ import math
 import pickle
 
 num_theta = 2
-#num_theta = 6
 horizon = 0
-num_ingredients = 3
-#num_ingredients = 5
+num_ingredients = 2
 
 """
 CHANGE GAME FILE BASED ON SCRIPT!!
@@ -20,12 +18,8 @@ CHANGE GAME FILE BASED ON SCRIPT!!
 
 robot_belief = [1/num_theta for i in range(num_theta)]
 
-reward_set = [((0,2,1),0), ((2,0,2), 1)]
-#reward_set = [((0,0,1),0), ((1,0,2),1), ((2,1,1),2)]
-#reward_set = [((0,2,1),0), ((1,0,2),1), ((2,1,1),2), ((2,0,2),3)]
-#reward_set = [((0,2,4),0), ((2,0,4),1), ((4,1,1),2), ((1,1,4),3)]
-#reward_set = [((2,0,4,0,2), 0), ((0,0,2,0,6), 1), ((0,0,3,5,0), 2), ((0,5,3,0,0), 3), ((4,0,4,0,0), 4), ((0,0,4,4,0), 5)]
-initial_world_state = (0,0,0)
+reward_set = [((0,4),0), ((5,0), 1)]
+initial_world_state = (0,0)
 #initial_world_state = (0,0,0,0,0)
 human_behavior = "boltzmann"
 
@@ -34,22 +28,14 @@ humanPolicy = HumanPolicy(num_actions = num_ingredients + 1, behavior = human_be
 robot = Robot(robot_belief, num_actions = num_ingredients + 1)
 game = Game(robot, humanPolicy, initial_world_state, num_theta, num_ingredients, reward_set)
 
-initial_history = Root(game, [((0,0,0),0), ((0,0,0),1)], 0)
-#initial_history = Root(game, [((0,0,0),0), ((0,0,0),1), ((0,0,0),2)], 0)
-# initial_history = Root(game, [((0,0,0),0), ((0,0,0),1), ((0,0,0),2), ((0,0,0),3)], 0)
-#initial_history = Root(game, [((0,0,0),0), ((0,0,0),1), ((0,0,0),2), ((0,0,0),3)], 0)
-#initial_history = Root(game, [((0,0,0,0,0),0), ((0,0,0,0,0),1), ((0,0,0,0,0),2), ((0,0,0,0,0),3), ((0,0,0,0,0),4), ((0,0,0,0,0),5)], 0)
+initial_history = Root(game, [((0,0),0), ((0,0),1)], 0)
 
 #make sure to change exploration accordingly - also what should the epsilon value be?
-epsilon = math.pow(0.95, 2)
-
-# print("Required Horizon: 4")
-# print("Number Of Theta: 6")
-# print("Number Of Ingredients: 5")
+epsilon = math.pow(0.95, 3)
 
 for _ in range(0, 1):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 0.1, 5, "rational")
+	solver = POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 0.4, 5, "rational")
 	solver.search()
 	data = solver.data
 	f = open('data-pomcp.txt', 'w')
