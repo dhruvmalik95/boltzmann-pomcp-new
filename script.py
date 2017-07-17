@@ -78,7 +78,7 @@ for _ in range(2, 8):
 	# 	l.append(data[round((math.e/1.62)**(i)) - 1])
 	# print(l)
 	big_l.append(l)
-		print("_____________________")
+	print("_____________________")
 f = open('data-pomcp.txt', 'w')
 f.write(str(big_l))
 
