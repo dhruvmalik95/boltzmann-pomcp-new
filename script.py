@@ -26,7 +26,9 @@ human_behavior = "boltzmann"
 
 humanPolicy = HumanPolicy(num_actions = num_ingredients + 1, behavior = human_behavior)
 robot = Robot(robot_belief, num_actions = num_ingredients + 1)
+print(1)
 game = Game(robot, humanPolicy, initial_world_state, num_theta, num_ingredients, reward_set)
+print(2)
 
 initial_history = Root(game, [((0,0,0,0,0,0,0,0,0,0),0), ((0,0,0,0,0,0,0,0,0,0),1), ((0,0,0,0,0,0,0,0,0,0),2), ((0,0,0,0,0,0,0,0,0,0),3), ((0,0,0,0,0,0,0,0,0,0),4), ((0,0,0,0,0,0,0,0,0,0),5)], 0)
 
