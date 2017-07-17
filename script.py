@@ -71,7 +71,7 @@ for _ in range(2, 8):
 	data = run(_)
 	l = []
 	for i in range(1,21):
-		l.append(data[round((math.e/1.62)**(i))])
+		l.append(data[round((math.e/1.62)**(i)) - 1])
 	print(l)
 	big_l.append(l)
 	print("_____________________")
