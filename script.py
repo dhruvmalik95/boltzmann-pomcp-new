@@ -10,7 +10,7 @@ import pickle
 
 num_theta = 2
 horizon = 0
-num_ingredients = 6
+num_ingredients = 7
 
 """
 CHANGE GAME FILE BASED ON SCRIPT!!
@@ -18,8 +18,8 @@ CHANGE GAME FILE BASED ON SCRIPT!!
 
 robot_belief = [1/num_theta for i in range(num_theta)]
 
-reward_set = [((0,0,2,2,0,0),0), ((0,2,0,2,0,0), 1)]
-initial_world_state = (0,0,0,0,0,0)
+reward_set = [((0,0,0,2,2,0,0),0), ((0,0,2,0,2,0,0), 1)]
+initial_world_state = (0,0,0,0,0,0,0)
 #initial_world_state = (0,0,0,0,0)
 human_behavior = "boltzmann"
 
@@ -28,14 +28,14 @@ humanPolicy = HumanPolicy(num_actions = num_ingredients + 1, behavior = human_be
 robot = Robot(robot_belief, num_actions = num_ingredients + 1)
 game = Game(robot, humanPolicy, initial_world_state, num_theta, num_ingredients, reward_set)
 
-initial_history = Root(game, [((0,0,0,0,0,0),0), ((0,0,0,0,0,0),1)], 0)
+initial_history = Root(game, [((0,0,0,0,0,0,0),0), ((0,0,0,0,0,0,0),1)], 0)
 
 #make sure to change exploration accordingly - also what should the epsilon value be?
 epsilon = math.pow(0.95, 2)
 
 for _ in range(0, 1):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 6, 5, "rational")
+	solver = POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 10, 5, "rational")
 	solver.search()
 	data = solver.data
 	f = open('data-pomcp.txt', 'w')
