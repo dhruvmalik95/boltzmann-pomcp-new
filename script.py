@@ -68,14 +68,17 @@ def run(n_ingredients):
 big_l = []
 for _ in range(2, 8):
 #KEEP THESE PARAMETERS FOR NOW!!
-	data = run(_)
 	l = []
 	for i in range(1,21):
-		l.append(data[round((math.e/1.62)**(i)) - 1])
+		data = run(_)
+		l.append(data[0])
 	print(l)
+	# l = []
+	# for i in range(1,21):
+	# 	l.append(data[round((math.e/1.62)**(i)) - 1])
+	# print(l)
 	big_l.append(l)
-	print("_____________________")
-
+		print("_____________________")
 f = open('data-pomcp.txt', 'w')
 f.write(str(big_l))
 
