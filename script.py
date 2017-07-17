@@ -10,7 +10,7 @@ import pickle
 
 num_theta = 6
 horizon = 0
-num_ingredients = 10
+num_ingredients = 9
 
 """
 CHANGE GAME FILE BASED ON SCRIPT!!
@@ -18,8 +18,8 @@ CHANGE GAME FILE BASED ON SCRIPT!!
 
 robot_belief = [1/num_theta for i in range(num_theta)]
 
-reward_set = [((0,0,4,2,0,0,0,0,0,0),0), ((0,0,3,0,0,1,1,0,0,0), 1), ((0,0,2,0,2,0,0,0,1,0), 2), ((1,0,1,0,0,0,0,0,0,2), 3), ((0,0,2,0,0,0,0,2,0,0), 4), ((0,1,1,0,0,0,2,0,1,0), 5)]
-initial_world_state = (0,0,0,0,0,0,0,0,0,0)
+reward_set = [((0,0,4,2,0,0,0,0,0),0), ((0,0,3,0,0,1,1,0,0), 1), ((0,0,2,0,2,0,0,0,1), 2), ((1,0,1,0,0,0,0,0,2), 3), ((0,0,2,0,0,0,0,2,0), 4), ((0,1,1,0,0,0,2,0,1), 5)]
+initial_world_state = (0,0,0,0,0,0,0,0,0)
 #initial_world_state = (0,0,0,0,0)
 human_behavior = "boltzmann"
 
@@ -30,7 +30,7 @@ print(1)
 game = Game(robot, humanPolicy, initial_world_state, num_theta, num_ingredients, reward_set)
 print(2)
 
-initial_history = Root(game, [((0,0,0,0,0,0,0,0,0,0),0), ((0,0,0,0,0,0,0,0,0,0),1), ((0,0,0,0,0,0,0,0,0,0),2), ((0,0,0,0,0,0,0,0,0,0),3), ((0,0,0,0,0,0,0,0,0,0),4), ((0,0,0,0,0,0,0,0,0,0),5)], 0)
+initial_history = Root(game, [((0,0,0,0,0,0,0,0,0),0), ((0,0,0,0,0,0,0,0,0),1), ((0,0,0,0,0,0,0,0,0),2), ((0,0,0,0,0,0,0,0,0),3), ((0,0,0,0,0,0,0,0,0),4), ((0,0,0,0,0,0,0,0,0),5)], 0)
 
 #make sure to change exploration accordingly - also what should the epsilon value be?
 epsilon = math.pow(0.95, 3)
