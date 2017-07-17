@@ -81,6 +81,8 @@ for _ in range(2, 8):
 	print("_____________________")
 f = open('data-pomcp.txt', 'w')
 f.write(str(big_l))
+print(big_l)
+print(len(big_l))
 
 """
 Things to keep in mind:
