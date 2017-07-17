@@ -76,6 +76,7 @@ for _ in range(1, 21):
 	data = run(6)
 	l = []
 	for i in range(1,21):
+		print(round((math.e/1.411)**(i)) - 1)
 		l.append(data[round((math.e/1.411)**(i)) - 1])
 	print(l)
 	big_l.append(l)
