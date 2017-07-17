@@ -249,7 +249,7 @@ class POMCP_Solver:
 		for child in history.children[self.actions.index(robot_action)].children:
 			#add exploration bonus for 0 times human action for that theta HERE
 			if child == "empty":
-				qValues.append(0 + self.c/4)
+				qValues.append(0 + self.c)
 
 				# OLD
 				# child_index = history.children[self.actions.index(robot_action)].children.index(child)
@@ -258,7 +258,7 @@ class POMCP_Solver:
 				# return next_state, next_human_action
 				#print("x")
 			else:
-				qValues.append(child.value_list[theta_index] + self.c/(3*child.visited_list[theta_index] + 1))
+				qValues.append(child.value_list[theta_index] + self.c/(1.5*child.visited_list[theta_index] + 1))
 
 		best_index = qValues.index(max(qValues))
 		next_human_action = self.observations[best_index]
