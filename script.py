@@ -77,7 +77,7 @@ for _ in range(2, 8):
 	print("_____________________")
 
 f = open('data-pomcp.txt', 'w')
-f.write(str(data))
+f.write(str(big_l))
 
 """
 Things to keep in mind:
