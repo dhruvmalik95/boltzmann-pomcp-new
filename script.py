@@ -61,7 +61,7 @@ def run(n_ingredients):
 		initial_history = Root(game, [((0,0,0,0,0,0,0),0), ((0,0,0,0,0,0,0),1)], 0)
 	#make sure to change exploration accordingly - also what should the epsilon value be?
 	epsilon = math.pow(0.95, 2)
-	solver = POMCP_Solver(0.95, epsilon, 502000, initial_history, game, 12.5, 5, "rational")
+	solver = POMCP_Solver(0.95, epsilon, 502000, initial_history, game, 10, 5, "rational")
 	solver.search()
 	return solver.data
 
