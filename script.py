@@ -75,8 +75,10 @@ for _ in range(1, 21):
 	# print(l)
 	data = run(5)
 	l = []
-	for i in range(3,6,0.15):
+	i = 3
+	while i < 6:
 		l.append(data[round(10**i) - 1000])
+		i = i + 0.15
 	print(l)
 	big_l.append(l)
 	print("_____________________")
