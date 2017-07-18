@@ -73,10 +73,10 @@ for _ in range(1, 21):
 	# 	data = run(_)
 	# 	l.append(data[0])
 	# print(l)
-	data = run(6)
+	data = run(5)
 	l = []
-	for i in range(1,21):
-		l.append(data[round((math.e/1.4111)**(i)) - 1])
+	for i in range(3,6,0.15):
+		l.append(data[round(10**i) - 1000])
 	print(l)
 	big_l.append(l)
 	print("_____________________")
