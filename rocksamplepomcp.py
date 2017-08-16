@@ -137,6 +137,7 @@ class Rocksample_POMCP_Solver:
 		if math.pow(self.gamma, depth) < self.epsilon:
 			return 0
 
+		#MALAYANDI
 		# if self.game.getReward(state):
 		# 	return 1
 
@@ -144,7 +145,7 @@ class Rocksample_POMCP_Solver:
 		next_robot_action = self.random_sample(self.actions)
 		next_human_action = self.random_sample(self.observations)
 
-		#this should multiply the gamma here right?
+		#MALAYANDI
 		return self.game.getReward(state, robot_action, human_action) + self.gamma*self.rollout(next_state, next_robot_action, next_human_action, depth + 1)
 
 	def simulate(self, state, history, depth):
@@ -161,6 +162,7 @@ class Rocksample_POMCP_Solver:
 		if math.pow(self.gamma, depth) < self.epsilon:
 			return 0
 			
+		#MALAYANDI
 		# if self.game.getReward(state):
 		# 	history.update_visited(state[1])
 		# 	history.update_value(1, state[1])
@@ -189,6 +191,7 @@ class Rocksample_POMCP_Solver:
 			history.children[self.actions.index(optimal_action)].children[self.observations.index(human_action)] = new_human_obs_child
 			next_history = history.children[self.actions.index(optimal_action)].children[self.observations.index(human_action)]
 
+		#MALAYANDI
 		R = self.game.getReward(state, optimal_action, human_action) + self.gamma*self.simulate(next_state, next_history, depth + 1)
 
 		history.children[self.actions.index(optimal_action)].update_visited()
