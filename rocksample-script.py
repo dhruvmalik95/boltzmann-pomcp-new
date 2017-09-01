@@ -8,23 +8,28 @@ from rocksamplepomcp import *
 import math
 import pickle
 
+initial_state = (0,0)
+rock_vector = [((1,1),0), ((2,0),1)]
+theta_set = [[10,0],[3,8]]
+game = Rocksample_Game(3, 3, 1, 1, initial_state, rock_vector, theta_set, 0.95)
 
-rock_vector = [((1,0),0), ((2,0),1)]
-theta_set = [[1,1],[1,1]]
-game = Rocksample_Game(10, 10, (0,0), rock_vector, theta_set, 0.95)
+all_states = game.getAllStates()
+belief = []
 
-# grid = [[0 for y in range(10)] for x in range(10)]
-# grid[0][0] = 1
+x = [initial_state, tuple(["no", "no"])]
+belief.append((x, 0))
+belief.append((x, 1))
+print(belief)
 
-initial_history = Root(game, [((0,0),0), ((0,0),1)], 0)
+initial_history = Root(game, belief, 0)
 
 #make sure to change exploration accordingly - also what should the epsilon value be?
-epsilon = math.pow(0.95, 5)
+epsilon = math.pow(0.95, 2)
 
 for _ in range(0, 1):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = Rocksample_POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 0.3, 5, "rational")
-	print(1)
+	solver = Rocksample_POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 500, 5, "rational")
+	print(_)
 	solver.search()
 	data = solver.data
 	f = open('data-pomcp.txt', 'w')

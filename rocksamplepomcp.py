@@ -4,7 +4,6 @@ import math
 from humannode import *
 from robotnode import *
 from timeit import default_timer as timer
-import requests
 from timeout import *
 
 class Rocksample_POMCP_Solver:
@@ -33,6 +32,9 @@ class Rocksample_POMCP_Solver:
 		self.theta_list = self.game.getAllTheta()
 		self.data = []
 
+		#MALAYANDI
+		self.reward_storer = 0
+
 	def search(self):
 		"""
 		The search function as described in Silver et al. Samples a start state for self.timer iterations.
@@ -46,6 +48,8 @@ class Rocksample_POMCP_Solver:
 			# if _ % 100000 == 0:
 			# 	print(_)
 			sample_state = self.history.sample_belief()
+			#print(self.history.belief)
+			#print(sample_state)
 			self.simulate(sample_state, self.history, 0)
 
 			# t = timer()
@@ -58,7 +62,7 @@ class Rocksample_POMCP_Solver:
 			# if timer() - start_0 > 4*60:
 			# 	return
 
-			if _ > 999:
+			if _ > 999 and _ % 50 == 0:
 				optimal_action = self.history.optimal_action(0)
 				optimal_child = self.history.children[self.actions.index(optimal_action)]
 				self.data.append((_,optimal_child.value))
@@ -74,9 +78,18 @@ class Rocksample_POMCP_Solver:
 
 		l = []
 		for child in self.history.children:
-			l.append(child.value)
+			if child.value:
+				l.append(child.value)
+			else:
+				l.append(None)
 		print(l)
-		print(optimal_child.optimal_action(0))
+		l = []
+		for child in optimal_child.children:
+			if child == "empty":
+				l.append(-10)
+			else:
+				l.append(child.value_list)
+		print(l)
 
 		#print(optimal_child.visited)
 		
@@ -159,7 +172,11 @@ class Rocksample_POMCP_Solver:
 		:param history: the history we are currently at in the search tree
 		:param depth: the current depth we are at in the search tree
 		"""
+		#MALAYANDI
+		#print(state)
 		if math.pow(self.gamma, depth) < self.epsilon:
+			history.update_visited(state[1])
+			history.update_value(self.reward_storer, state[1])
 			return 0
 			
 		#MALAYANDI
@@ -169,7 +186,7 @@ class Rocksample_POMCP_Solver:
 		# 	return 1
 
 		optimal_action = history.optimal_action(self.c)
-		
+
 		if history.children[self.actions.index(optimal_action)] == "empty":
 			rollout_value = self.rollout_helper(state, optimal_action, history, depth)
 			#should this be the reward or gamma^depth*reward
@@ -193,6 +210,7 @@ class Rocksample_POMCP_Solver:
 
 		#MALAYANDI
 		R = self.game.getReward(state, optimal_action, human_action) + self.gamma*self.simulate(next_state, next_history, depth + 1)
+		self.reward_storer = self.game.getReward(state, optimal_action, human_action)
 
 		history.children[self.actions.index(optimal_action)].update_visited()
 		history.children[self.actions.index(optimal_action)].update_value(R)
@@ -202,6 +220,9 @@ class Rocksample_POMCP_Solver:
 		history.update_value(R, state[1])
 
 		return R
+
+	def reward_storer_helper(self, state, robot_action, human_action):
+		return
 
 	def sampleBoltzmann(self, state, robot_action, history):
 		"""
