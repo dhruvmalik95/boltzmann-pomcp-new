@@ -26,15 +26,23 @@ initial_history = Root(game, belief, 0)
 #make sure to change exploration accordingly - also what should the epsilon value be?
 epsilon = math.pow(0.95, 2)
 
-for _ in range(0, 1):
+big_l = []
+for _ in range(0, 2):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = Rocksample_POMCP_Solver(0.95, epsilon, 1200000, initial_history, game, 500, 5, "rational")
+	solver = Rocksample_POMCP_Solver(0.95, epsilon, 600000, initial_history, game, 500, 5)
 	print(_)
 	solver.search()
 	data = solver.data
-	f = open('data-pomcp.txt', 'w')
-	f.write(str(data))
-	print("_____________________")
+	l = []
+	i = 3
+	while i <= 5.775:
+		l.append(data[round(10^i) - 1000])
+		i = i + 0.13875
+	big_l.append(l)
+
+f = open('data-pomcp.txt', 'w')
+f.write(str(big_l))
+print("_____________________")
 
 """
 Things to keep in mind:
