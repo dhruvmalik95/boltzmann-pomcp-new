@@ -8,28 +8,29 @@ from rocksamplepomcp import *
 import math
 import pickle
 
-initial_state = (0,0)
-rock_vector = [((2,1),0), ((1,2),1)]
-theta_set = [[1,0],[0.3,0.8]]
-game = Rocksample_Game(3, 3, 1, 1, initial_state, rock_vector, theta_set, 0.95)
-
-all_states = game.getAllStates()
-belief = []
-
-x = [initial_state, tuple(["no", "no"])]
-belief.append((x, 0))
-belief.append((x, 1))
-print(belief)
-
-initial_history = Root(game, belief, 0)
-
-#make sure to change exploration accordingly - also what should the epsilon value be?
-epsilon = math.pow(0.95, 2)
-
 big_l = []
 for _ in range(0, 2):
+	initial_state = (0,0)
+	rock_vector = [((2,1),0), ((1,2),1)]
+	theta_set = [[1,0],[0.3,0.8]]
+	game = Rocksample_Game(3, 3, 1, 1, initial_state, rock_vector, theta_set, 0.95)
+
+	all_states = game.getAllStates()
+	belief = []
+
+	x = [initial_state, tuple(["no", "no"])]
+	belief.append((x, 0))
+	belief.append((x, 1))
+	print(belief)
+
+	initial_history = Root(game, belief, 0)
+
+#make sure to change exploration accordingly - also what should the epsilon value be?
+	epsilon = math.pow(0.95, 2)
+
+
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = Rocksample_POMCP_Solver(0.95, epsilon, 600000, initial_history, game, 500, 5)
+	solver = Rocksample_POMCP_Solver(0.95, epsilon, 600000, initial_history, game, 500, 5, "rational")
 	print(_)
 	solver.search()
 	data = solver.data
