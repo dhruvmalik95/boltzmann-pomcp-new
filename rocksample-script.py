@@ -28,7 +28,7 @@ epsilon = math.pow(0.95, 2)
 
 for _ in range(0, 1):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = Rocksample_POMCP_Solver(0.95, epsilon, 500000, initial_history, game, 500, 5, "rational")
+	solver = Rocksample_POMCP_Solver(0.95, epsilon, 1200000, initial_history, game, 500, 5, "rational")
 	print(_)
 	solver.search()
 	data = solver.data
