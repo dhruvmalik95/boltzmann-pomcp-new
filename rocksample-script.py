@@ -9,8 +9,8 @@ import math
 import pickle
 
 initial_state = (0,0)
-rock_vector = [((1,1),0), ((2,0),1)]
-theta_set = [[10,0],[3,8]]
+rock_vector = [((2,1),0), ((1,2),1)]
+theta_set = [[1,0],[0.3,0.8]]
 game = Rocksample_Game(3, 3, 1, 1, initial_state, rock_vector, theta_set, 0.95)
 
 all_states = game.getAllStates()
