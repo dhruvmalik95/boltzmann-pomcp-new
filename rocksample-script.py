@@ -20,6 +20,7 @@ for _ in range(0, 2):
 
 	x = [initial_state, tuple(["no", "no"])]
 	belief.append((x, 0))
+	
 	belief.append((x, 1))
 	print(belief)
 
