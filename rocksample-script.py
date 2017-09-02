@@ -29,14 +29,15 @@ epsilon = math.pow(0.95, 2)
 big_l = []
 for _ in range(0, 2):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = Rocksample_POMCP_Solver(0.95, epsilon, 600000, initial_history, game, 500, 5)
+	solver = Rocksample_POMCP_Solver(0.95, epsilon, 600000, initial_history, game, 500, 5, "rational")
 	print(_)
+	print(solver.data)
 	solver.search()
 	data = solver.data
 	l = []
 	i = 3
 	while i <= 5.775:
-		l.append(data[round(10^i) - 1000])
+		l.append(data[round(10**i) - 1000])
 		i = i + 0.13875
 	big_l.append(l)
 
