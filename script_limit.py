@@ -37,7 +37,7 @@ initial_history = Root(game, [((0,0,0),0), ((0,0,0),1)], 0)
 epsilon = math.pow(0.95, 2)
 
 l = []
-for _ in range(0, 3):
+for _ in range(0, 20):
 #KEEP THESE PARAMETERS FOR NOW!!
 	solver = POMCP_Solver(0.95, epsilon, 100000, initial_history, game, 150, 5, "rational")
 	print(_)
