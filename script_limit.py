@@ -20,7 +20,7 @@ CHANGE GAME FILE BASED ON SCRIPT!!
 
 robot_belief = [1/num_theta for i in range(num_theta)]
 
-reward_set = [((2,0,2),0), ((0,2,1),1)]
+reward_set = [((1,2,0),0), ((2,1,1),1)]
 
 initial_world_state = (0,0,0)
 #initial_world_state = (0,0,0,0,0)
@@ -36,15 +36,18 @@ initial_history = Root(game, [((0,0,0),0), ((0,0,0),1)], 0)
 #make sure to change exploration accordingly - also what should the epsilon value be?
 epsilon = math.pow(0.95, 2)
 
-for _ in range(0, 1):
+l = []
+for _ in range(0, 3):
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = POMCP_Solver(0.95, epsilon, 2000000, initial_history, game, 300, 5, "rational")
-	print(1)
+	solver = POMCP_Solver(0.95, epsilon, 100000, initial_history, game, 150, 5, "rational")
+	print(_)
 	solver.search()
 	data = solver.data
-	f = open('data-pomcp.txt', 'w')
-	f.write(str(data))
-	print("_____________________")
+	l.append(data)
+
+f = open('data-pomcp.txt', 'w')
+f.write(str(l))
+print("_____________________")
 
 """
 Things to keep in mind:
