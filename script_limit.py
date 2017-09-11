@@ -9,7 +9,7 @@ import math
 import pickle
 
 l = []
-for _ in range(0, 5):
+for _ in range(0, 10):
 	num_theta = 4
 	#num_theta = 6
 	horizon = 0
@@ -40,7 +40,7 @@ for _ in range(0, 5):
 
 
 #KEEP THESE PARAMETERS FOR NOW!!
-	solver = POMCP_Solver(0.95, epsilon, 30000, initial_history, game, 0.2, 5, "rational")
+	solver = POMCP_Solver(0.95, epsilon, 30000, initial_history, game, 0.5, 5, "rational")
 	print(_)
 	solver.search()
 	data = solver.data
